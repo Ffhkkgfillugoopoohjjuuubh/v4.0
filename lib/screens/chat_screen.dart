@@ -4,14 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import '../models/chat_message.dart';
 import '../providers/chat_provider.dart';
-import '../providers/ad_provider.dart';
+//import '../providers/ad_provider.dart';
 import '../services/api_service.dart';
 import '../services/ocr_service.dart';
 import '../services/revenue_optimizer.dart';
 import '../services/tts_service.dart';
 import '../widgets/message_bubble.dart';
 import '../widgets/chat_input_widget.dart';
-import '../widgets/banner_ad_widget.dart';
+//import '../widgets/banner_ad_widget.dart';
 import '../widgets/thinking_animation.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
@@ -35,9 +35,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   void initState() {
     super.initState();
     _ttsService.initialize();
-    _revenueOptimizer.adRefreshSignal.listen((refresh) {
-      if (refresh) ref.read(adProvider).reloadAds();
-    });
   }
 
   Future<void> _handleSend(String text, File? image) async {
@@ -109,7 +106,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       ),
       body: Column(
         children: [
-          const BannerAdWidget(adUnitId: AdProvider.topAdUnitId, position: 'top'),
           Expanded(
             child: ListView.builder(
               itemCount: session.messages.length,
@@ -129,7 +125,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             onSend: _handleSend,
             onFocus: _revenueOptimizer.pauseTimer,
           ),
-          const BannerAdWidget(adUnitId: AdProvider.bottomAdUnitId, position: 'bottom'),
         ],
       ),
     );

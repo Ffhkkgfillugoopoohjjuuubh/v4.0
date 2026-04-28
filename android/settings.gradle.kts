@@ -7,21 +7,22 @@ pluginManagement {
             require(flutterSdkPath != null) { "flutter.sdk not set in local.properties" }
             flutterSdkPath
         }
-
     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
-
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven { url = uri("https://storage.googleapis.com/download.flutter.io") }
     }
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://storage.googleapis.com/download.flutter.io") }
+        maven { url = uri("https://dl.google.com/dl/android/maven2") }
     }
 }
 

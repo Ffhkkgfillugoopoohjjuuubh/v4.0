@@ -7,3 +7,5 @@
 -keep class io.flutter.** { *; }
 -keep class androidx.** { *; }
 -dontwarn androidx.**
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.android.gms.**
